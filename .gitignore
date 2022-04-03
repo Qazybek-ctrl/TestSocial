@@ -1,0 +1,5 @@
+db.sqlite3
+social/__pycache__
+Auth/__pycache__
+media/
+media-cdn/

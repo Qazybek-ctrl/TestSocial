@@ -1,0 +1,1 @@
+A small social network without chat functionality.
