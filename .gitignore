@@ -1,5 +1,6 @@
 db.sqlite3
 social/__pycache__
 Auth/__pycache__
+network/__pycache__
 media/
 media-cdn/
