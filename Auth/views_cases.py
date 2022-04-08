@@ -2,6 +2,8 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect
+from network.models import SocialPerson
+
 
 def pass_user_to_acc(request):
     email = request.POST['email']
@@ -27,6 +29,13 @@ def register_new_user(request):
         last_name=user_last_name,
         email=user_email
     )
+    user = User.objects.get(username = user_username)
+    person = SocialPerson(
+        user = user,
+        age = int(request.POST['age'])
+    )
+    person.save()
+
 
 def check_user_unique(request):
     user = User.objects.filter(username = request.POST['email'])

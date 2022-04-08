@@ -8,7 +8,7 @@ from . import views_cases
 
 def logging_out(request):
     logout(request)
-    return redirect("home")
+    return redirect("authorization_problem")
 
 def logining_view(request):
     context = {
@@ -17,7 +17,7 @@ def logining_view(request):
     }
     if request.method == 'POST':
         context['error'] = views_cases.pass_user_to_acc(request)
-        return redirect("polls")
+        return redirect("main")
     return render(request, 'Auth/logining.html', context)
 
 def registration_view(request):
