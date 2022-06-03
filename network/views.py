@@ -51,6 +51,7 @@ def profileEdit(request):
 
 
 def retrieveLocation(request):
+    # This function doesn't work
     address = request.META.get('REMOTE_ADDR')
     key = '38154a99d1054c5f8563db3d404dbb25'
     url = f'https://api.ipgeolocation.io/ipgeo?apiKey={key}&ip={address}'
@@ -58,11 +59,14 @@ def retrieveLocation(request):
     return "Almaty, Kazakshtan"
 
 
-def index(request):     
-    if request.method == "GET" and 'user_id' in request.GET:
-        person = SocialPerson.objects.get(user=request.GET['user_id'])
-    else:
-        person = SocialPerson.objects.get(user=request.user.id)
+def index(request):  
+    try:   
+        if request.method == "GET" and 'user_id' in request.GET:
+            person = SocialPerson.objects.get(user=request.GET['user_id'])
+        else:
+            person = SocialPerson.objects.get(user=request.user.id)
+    except Exception:
+        return redirect("main")
 
     context = {
         'person': person,
