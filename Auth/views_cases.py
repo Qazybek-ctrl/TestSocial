@@ -13,7 +13,8 @@ def pass_user_to_acc(request):
         login(request, user)
         return ""
     else:
-        return "User with this email doesn't exist"
+        return authorization(request)
+        
 
 def register_new_user(request):
     user_name = request.POST['first_name']
@@ -48,7 +49,12 @@ def check_user_unique(request):
         return "User with this email already exists!"
 
 def authorization(request):
-    user = User.objects.filter(username = request.POST['email'])
+    email = request.POST['email']
+    password = request.POST['password']
+    user = User.objects.filter(username = email)
+    passes = User.objects.filter(password=password)
     if len(user) == 0:
         return "Account doesn't exists!"
+    if len(user) != 0 and len(passes) == 0:
+        return "Password is incorrect! try again:)"
     
